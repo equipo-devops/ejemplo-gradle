@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     stage('build & test') {
-                            sh  "./gradlew clean build"
+                            sh  "gradle clean build"
                     }
                     stage('sonar'){   
                         def scannerHome = tool 'sonar';  withSonarQubeEnv('sonar') {
