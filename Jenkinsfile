@@ -34,7 +34,7 @@ pipeline {
                         groupId: 'com.devopsusach2020',
                         version: '0.0.1',
                         repository: 'test-nexus',
-                        credentialsId: 'credencial_nexus',
+                        credentialsId: 'nexus',
                         artifacts: [
                             [artifactId: 'DevOpsUsach2020',
                             classifier: '',
