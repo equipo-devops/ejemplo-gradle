@@ -11,10 +11,10 @@ pipeline {
                             sh  "gradle clean build"
                     }
                     stage('sonar'){   
-                        def scannerHome = tool 'Sonar';  
+                   /*     def scannerHome = tool 'Sonar';  
                         withSonarQubeEnv('Sonar') {
                                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"                         
-                                    } 
+                                    } */
                      } 
 
                     stage('run') {
