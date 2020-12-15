@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     stage('build & test') {
-                            sh  "gradle clean build"
+                            sh  './gradlew clean build'
                     }
                     stage('sonar'){   
                    /*     def scannerHome = tool 'Sonar';  
