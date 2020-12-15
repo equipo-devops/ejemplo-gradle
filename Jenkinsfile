@@ -8,12 +8,11 @@ pipeline {
             steps {
                 script {
                     stage('build & test') {
-                    
-                    }
-                    stage('sonar'){   
-                
-                     } 
 
+                    }
+                    stage('sonar') {
+                        
+                    }
                     stage('run') {
                         
                     }
@@ -25,4 +24,3 @@ pipeline {
         }
     }
 }
-
