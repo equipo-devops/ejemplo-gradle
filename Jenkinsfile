@@ -27,6 +27,21 @@ pipeline {
                         sh 'curl -X GET "http://localhost:8081/rest/mscovid/test?msg=testing"'
                     }
                     stage('nexus') {
+                    	    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: 'localhost:8081',
+                        groupId: 'com.devopsusach2020',
+                        version: '0.0.1',
+                        repository: 'test-nexus',
+                        credentialsId: 'credencial_nexus',
+                        artifacts: [
+                            [artifactId: 'DevOpsUsach2020',
+                            classifier: '',
+                            file: 'build/libs/DevOpsUsach2020-1.0.2.jar',
+                            type: 'jar']
+                        ]
+                        )
                         
                     }
                 }
