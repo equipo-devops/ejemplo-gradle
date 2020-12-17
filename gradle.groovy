@@ -14,7 +14,7 @@ def call(){
      
                 script {
                     stage('build & test') {
-                        script { etapa = "build & test" }
+                        script { env.ETAPA = "build & test" }
                           sh  "gradle cleanx build"
                     }
                     stage('sonar') {
