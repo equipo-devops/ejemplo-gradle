@@ -6,6 +6,9 @@ pipeline {
     stages {
         stage('Pipeline') {
             steps {
+
+                   wrap([$class: 'BuildUser']) { script { env.USER_ID = "${BUILD_USER_ID}" } }  
+
                 script{
                     if (params.Eleccion == 'maven') {
                         echo "ejecución maven"
@@ -23,10 +26,9 @@ pipeline {
 post {
         success {
            // slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '[${USER}] [${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-           wrap([$class: 'BuildUser']) {
-           Def user = env.BUILD_USER_ID
-          slackSend (color: '#00FF00', message: "Build Success: '[${user}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
-          }
+         
+          slackSend (color: '#00FF00', message: "Build Success: '[${env.USER_ID}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
+          
               
              
         }
