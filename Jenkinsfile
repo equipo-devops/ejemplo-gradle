@@ -23,7 +23,11 @@ pipeline {
 post {
         success {
            // slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '[${USER}] [${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-              slackSend (color: '#00FF00', message: "Build Success: '[${git.USER}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
+           wrap([$class: 'BuildUser']) {
+           Def user = env.BUILD_USER_ID
+          slackSend (color: '#00FF00', message: "Build Success: '[${user}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
+          }
+              
              
         }
         failure {
