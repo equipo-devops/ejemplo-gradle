@@ -14,7 +14,8 @@ def call(){
      
                 script {
                     stage('build & test') {
-                          sh  "gradle clean build"
+                        script { env.STAGE = "build & test" }
+                          sh  "gradle cleanx build"
                     }
                     stage('sonar') {
                            def scannerHome = tool 'sonar-scanner'; // scanner
