@@ -12,6 +12,7 @@ def call(){
   script{
     //Escribir directamente el código del stage, sin agregarle otra clausula de Jenkins.
             stage('Compile') {
+              script { env.ETAPA = "Compile" }
           
               sh './mvnw clean compile -e'
           
@@ -19,6 +20,7 @@ def call(){
         }
         stage('Unit') {
             
+                    script { env.ETAPA = "Unit" }
              
                     sh './mvnw clean test -e'
             
@@ -26,13 +28,14 @@ def call(){
         }
         stage('Jar') {
           
-                  
+                   script { env.ETAPA = "Jar" }
                     sh './mvnw clean package -e'
             
             
         }
 
           stage('SonarQube') {
+             script { env.ETAPA = "SonarQube" }
           	
     			withSonarQubeEnv('Sonar') { // You can override the credential to be used
       			sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
@@ -41,6 +44,7 @@ def call(){
   		}
 
       stage('Nexus Upload'){
+                        script { env.ETAPA = "Nexus Upload" }
                     
                         nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus',
                          packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '',
@@ -52,7 +56,7 @@ def call(){
 
         stage('Run') {
             
-            
+                    script { env.ETAPA = "Run" }
                     sh 'nohup bash mvnw spring-boot:run &'
                     
               
@@ -61,6 +65,7 @@ def call(){
             
         }
          stage('Test') {
+                script { env.ETAPA = "Test" }
             
                 sleep 20
                 sh 'curl http://localhost:8081/rest/mscovid/test?msg=testing'
@@ -68,6 +73,7 @@ def call(){
         } 
         
        stage('Stop') {
+                    script { env.ETAPA = "Stop" }
             
                     sh 'bash mvnw spring-boot:stop &'
                     

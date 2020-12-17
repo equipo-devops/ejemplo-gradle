@@ -14,10 +14,11 @@ def call(){
      
                 script {
                     stage('build & test') {
-                        script { env.ETAPA = "build & test" }
-                          sh  "gradle cleanx build"
+                          script { env.ETAPA = "build & test" }
+                          sh  "gradle clean build"
                     }
                     stage('sonar') {
+                        script { env.ETAPA = "sonar" }
                            def scannerHome = tool 'sonar-scanner'; // scanner
                         withSonarQubeEnv('Sonar') { // server
                             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build " 
@@ -25,15 +26,18 @@ def call(){
                     
                     }
                     stage('run') {
+                         script { env.ETAPA = "run" }
 
-                         sh "nohup bash gradle bootRun &"
+                         sh "nohup bashx gradle bootRun &"
                         
                     }
                       stage('rest') {
+                        script { env.ETAPA = "rest" }
                         sleep(time: 10, unit: 'SECONDS')
                         sh 'curl -X GET "http://localhost:8081/rest/mscovid/test?msg=testing"'
                     }
                     stage('nexus') {
+                           script { env.ETAPA = "nexus" }
                     	    nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
