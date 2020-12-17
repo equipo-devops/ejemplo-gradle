@@ -23,7 +23,8 @@ pipeline {
 post {
         success {
            // slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '[${USER}] [${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-              slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '[${USER}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
+              slackSend (color: '#00FF00', message: "Build Success: '[${git.USER}] [${env.JOB_NAME}] [${params.Eleccion}]' Ejecución exitosa. ")
+             
         }
         failure {
            slackSend (color: '#FF0000', message: "FAILED: Job '${USER} ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
