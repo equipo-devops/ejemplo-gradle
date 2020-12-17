@@ -19,7 +19,7 @@ def call(){
                     }
                     stage('sonar') {
                         script { env.ETAPA = "sonar" }
-                           def scannerHome = tool 'sonar-scanner5000'; // scanner
+                           def scannerHome = tool 'sonar-scanner'; // scanner
                         withSonarQubeEnv('Sonar') { // server
                             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build " 
                         }
