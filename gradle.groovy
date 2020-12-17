@@ -28,7 +28,7 @@ def call(){
                     stage('run') {
                          script { env.ETAPA = "run" }
 
-                         sh "nohup bashx gradle bootRun &"
+                         sh "nohupsssssss bash gradle bootRun &"
                         
                     }
                       stage('rest') {
