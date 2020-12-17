@@ -29,7 +29,7 @@ def call(){
         stage('Jar') {
           
                    script { env.ETAPA = "Jar" }
-                    sh './mvnw clean package -e'
+                    sh './mvnw cleanxxxxxx packagexxxxx -e'
             
             
         }
